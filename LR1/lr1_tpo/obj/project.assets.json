@@ -93,11 +93,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\lr1_tpo.csproj",
+      "projectUniqueName": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\lr1_tpo.csproj",
       "projectName": "lr1_tpo",
-      "projectPath": "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\lr1_tpo.csproj",
+      "projectPath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\lr1_tpo.csproj",
       "packagesPath": "C:\\Users\\anime\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\obj\\",
+      "outputPath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\anime\\AppData\\Roaming\\NuGet\\NuGet.Config",

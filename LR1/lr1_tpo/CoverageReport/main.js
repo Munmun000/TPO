@@ -213,10 +213,11 @@ var assemblies = [
   {
     "name": "lr1_tpo",
     "classes": [
-      { "name": "BTreeSelectionAlgorithm.BTree<T>", "rp": "lr1_tpo_BTree_1.html", "cl": 89, "ucl": 7, "cal": 96, "tl": 159, "cb": 37, "tb": 44, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "BTreeSelectionAlgorithm.BTreeNode<T>", "rp": "lr1_tpo_BTreeNode_1.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 159, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "BTreeSelectionAlgorithm.SelectionAlgorithm", "rp": "lr1_tpo_SelectionAlgorithm.html", "cl": 8, "ucl": 1, "cal": 9, "tl": 159, "cb": 3, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "lr1_tpo.Program", "rp": "lr1_tpo_Program.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 16, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "BTreeSelectionAlgorithm.BTree<T>", "rp": "lr1_tpo_BTree_1.html", "cl": 86, "ucl": 7, "cal": 93, "tl": 188, "cb": 36, "tb": 44, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "BTreeSelectionAlgorithm.BTreeNode<T>", "rp": "lr1_tpo_BTreeNode_1.html", "cl": 4, "ucl": 1, "cal": 5, "tl": 188, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "BTreeSelectionAlgorithm.DefaultNodeCreator<T>", "rp": "lr1_tpo_DefaultNodeCreator_1.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 188, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "BTreeSelectionAlgorithm.SelectionAlgorithm", "rp": "lr1_tpo_SelectionAlgorithm.html", "cl": 10, "ucl": 1, "cal": 11, "tl": 188, "cb": 3, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "lr1_tpo.Program", "rp": "lr1_tpo_Program.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -231,7 +232,7 @@ var riskHotspotMetrics = [
 
 var riskHotspots = [
   {
-    "assembly": "lr1_tpo", "class": "BTreeSelectionAlgorithm.BTree<T>", "reportPath": "lr1_tpo_BTree_1.html", "methodName": "InsertNonFull(BTreeSelectionAlgorithm.BTreeNode`1<T>,T)", "methodShortName": "InsertNonFull(...)", "fileIndex": 0, "line": 61,
+    "assembly": "lr1_tpo", "class": "BTreeSelectionAlgorithm.BTree<T>", "reportPath": "lr1_tpo_BTree_1.html", "methodName": "InsertNonFull(BTreeSelectionAlgorithm.IBTreeNode`1<T>,T)", "methodShortName": "InsertNonFull(...)", "fileIndex": 0, "line": 81,
     "metrics": [
       { "value": 24, "exceeded": false },
       { "value": 20, "exceeded": true },

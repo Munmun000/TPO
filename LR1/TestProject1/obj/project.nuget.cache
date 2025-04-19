@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "17uCujG+aSQ=",
+  "dgSpecHash": "TcgnPkVTXqo=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\univer\\tpo\\LR1\\TestProject1\\TestProject1.csproj",
+  "projectFilePath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\TestProject1\\TestProject1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anime\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\anime\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
+    "C:\\Users\\anime\\.nuget\\packages\\coverlet.msbuild\\6.0.4\\coverlet.msbuild.6.0.4.nupkg.sha512",
     "C:\\Users\\anime\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
     "C:\\Users\\anime\\.nuget\\packages\\microsoft.net.test.sdk\\17.8.0\\microsoft.net.test.sdk.17.8.0.nupkg.sha512",
     "C:\\Users\\anime\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

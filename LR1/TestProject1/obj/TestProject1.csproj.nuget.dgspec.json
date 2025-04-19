@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\univer\\tpo\\LR1\\TestProject1\\TestProject1.csproj": {}
+    "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\TestProject1\\TestProject1.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\lr1_tpo.csproj": {
+    "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\lr1_tpo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\lr1_tpo.csproj",
+        "projectUniqueName": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\lr1_tpo.csproj",
         "projectName": "lr1_tpo",
-        "projectPath": "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\lr1_tpo.csproj",
+        "projectPath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\lr1_tpo.csproj",
         "packagesPath": "C:\\Users\\anime\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\obj\\",
+        "outputPath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\anime\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -72,14 +72,14 @@
         }
       }
     },
-    "D:\\Projects\\univer\\tpo\\LR1\\TestProject1\\TestProject1.csproj": {
+    "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\TestProject1\\TestProject1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\univer\\tpo\\LR1\\TestProject1\\TestProject1.csproj",
+        "projectUniqueName": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\TestProject1\\TestProject1.csproj",
         "projectName": "TestProject1",
-        "projectPath": "D:\\Projects\\univer\\tpo\\LR1\\TestProject1\\TestProject1.csproj",
+        "projectPath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\TestProject1\\TestProject1.csproj",
         "packagesPath": "C:\\Users\\anime\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\univer\\tpo\\LR1\\TestProject1\\obj\\",
+        "outputPath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\TestProject1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\anime\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -96,8 +96,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\lr1_tpo.csproj": {
-                "projectPath": "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\lr1_tpo.csproj"
+              "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\lr1_tpo.csproj": {
+                "projectPath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\lr1_tpo.csproj"
               }
             }
           }
@@ -138,6 +138,12 @@
               "version": "[4.5.0, )"
             },
             "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "coverlet.msbuild": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",

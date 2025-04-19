@@ -5,25 +5,50 @@ using System.Linq;
 namespace BTreeSelectionAlgorithm
 {
     // Узел B-дерева
-    public class BTreeNode<T> where T : IComparable<T>
+    public interface IBTreeNode<T> where T : IComparable<T>
+    {
+        List<T> Keys { get; }
+        List<IBTreeNode<T>> Children { get; }
+        bool IsLeaf { get; }
+        void AddKey(T key);
+        void AddChild(IBTreeNode<T> node);
+    }
+
+    public class BTreeNode<T> : IBTreeNode<T> where T : IComparable<T>
     {
         public List<T> Keys { get; } = new List<T>();
-        public List<BTreeNode<T>> Children { get; } = new List<BTreeNode<T>>();
+        public List<IBTreeNode<T>> Children { get; } = new List<IBTreeNode<T>>();
         public bool IsLeaf => Children.Count == 0;
+
+        public void AddKey(T key) => Keys.Add(key);
+        public void AddChild(IBTreeNode<T> node) => Children.Add(node);
+    }
+
+    public class DefaultNodeCreator<T> : BTree<T>.INodeCreator<T>
+    where T : IComparable<T>
+    {
+        public IBTreeNode<T> CreateNode() => new BTreeNode<T>();
     }
 
     // B-дерево 
     public class BTree<T> where T : IComparable<T>
     {
         private readonly int _degree;
-        private BTreeNode<T> _root;
+        private IBTreeNode<T> _root;
+        private readonly INodeCreator<T> _nodeCreator;
 
-        public BTree(int degree)
+        public interface INodeCreator<U> where U : IComparable<U>
+        {
+            IBTreeNode<U> CreateNode();
+        }
+
+        public BTree(int degree, IBTreeNode<T> rootNode, INodeCreator<T> nodeCreator)
         {
             if (degree < 2)
                 throw new ArgumentException("Degree must be at least 2", nameof(degree));
             _degree = degree;
-            _root = new BTreeNode<T>();
+            _root = rootNode;
+            _nodeCreator = nodeCreator;
         }
 
         // Сборка
@@ -41,23 +66,18 @@ namespace BTreeSelectionAlgorithm
         // Добавление ключа в дерево
         private void Insert(T key)
         {
-            var root = _root;
-            if (root.Keys.Count == (2 * _degree) - 1)
+            if (_root.Keys.Count == (2 * _degree) - 1)
             {
-                var newRoot = new BTreeNode<T>();
-                newRoot.Children.Add(root);
-                SplitChild(newRoot, 0);
+                var newRoot = _nodeCreator.CreateNode();
+                newRoot.AddChild(_root);
+                SplitChild(newRoot, 0, _nodeCreator);
                 _root = newRoot;
-                InsertNonFull(newRoot, key);
             }
-            else
-            {
-                InsertNonFull(root, key);
-            }
+            InsertNonFull(_root, key);
         }
 
         // Поиск места для вставки
-        private void InsertNonFull(BTreeNode<T> node, T key)
+        private void InsertNonFull(IBTreeNode<T> node, T key)
         {
             int i = node.Keys.Count - 1;
             if (node.IsLeaf)
@@ -77,7 +97,7 @@ namespace BTreeSelectionAlgorithm
                 i++;
                 if (node.Children[i].Keys.Count == (2 * _degree) - 1)
                 {
-                    SplitChild(node, i);
+                    SplitChild(node, i, _nodeCreator);
                     if (key.CompareTo(node.Keys[i]) > 0)
                     {
                         i++;
@@ -88,10 +108,12 @@ namespace BTreeSelectionAlgorithm
         }
 
         // Разделение потомка на два узла
-        private void SplitChild(BTreeNode<T> parentNode, int childIndex)
+        private void SplitChild(IBTreeNode<T> parentNode,
+                      int childIndex,
+                      INodeCreator<T> creator)
         {
             var child = parentNode.Children[childIndex];
-            var newNode = new BTreeNode<T>();
+            var newNode = creator.CreateNode();
             parentNode.Keys.Insert(childIndex, child.Keys[_degree - 1]);
             parentNode.Children.Insert(childIndex + 1, newNode);
 
@@ -111,7 +133,7 @@ namespace BTreeSelectionAlgorithm
             return SelectInternal(_root, condition);
         }
 
-        private IEnumerable<T> SelectInternal(BTreeNode<T> node, Func<T, bool> condition)
+        private IEnumerable<T> SelectInternal(IBTreeNode<T> node, Func<T, bool> condition)
         {
             if (node == null) yield break;
 
@@ -143,16 +165,23 @@ namespace BTreeSelectionAlgorithm
 
     public static class SelectionAlgorithm
     {
-        public static IEnumerable<T> Select<T>(IEnumerable<T> sequence, Func<T, bool> condition) where T : IComparable<T>
+        public static IEnumerable<T> Select<T>(IEnumerable<T> sequence, Func<T, bool> condition)
+            where T : IComparable<T>
         {
             if (sequence == null)
                 throw new ArgumentNullException(nameof(sequence));
             if (condition == null)
                 throw new ArgumentNullException(nameof(condition));
 
+            var creator = new DefaultNodeCreator<T>();
+            var root = creator.CreateNode();
+
             const int degree = 100;
-            var btree = new BTree<T>(degree);
+
+            var btree = new BTree<T>(degree, root, creator);
+
             btree.Build(sequence);
+
             return btree.Select(condition);
         }
     }

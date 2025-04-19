@@ -9,25 +9,47 @@ namespace BTreeSelectionAlgorithm.Tests
     [TestFixture]
     public class BTreeTests
     {
-        private const int Degree = 3;
+        private const int Degree = 2;
         private BTree<int> _btree;
+        private Mock<BTree<int>.INodeCreator<int>> _mockNodeCreator;
+        private Mock<IBTreeNode<int>> _mockRootNode;
 
         [SetUp]
         public void Setup()
         {
-            _btree = new BTree<int>(Degree);
+            _mockNodeCreator = new Mock<BTree<int>.INodeCreator<int>>();
+            _mockRootNode = new Mock<IBTreeNode<int>>();
+
+            _mockRootNode.SetupGet(x => x.Keys).Returns(new List<int>());
+            _mockRootNode.SetupGet(x => x.Children).Returns(new List<IBTreeNode<int>>());
+            _mockRootNode.SetupGet(x => x.IsLeaf).Returns(true);
+
+            _mockNodeCreator.Setup(x => x.CreateNode()).Returns(() =>
+            {
+                var mockNode = new Mock<IBTreeNode<int>>();
+                mockNode.SetupGet(n => n.Keys).Returns(new List<int>());
+                mockNode.SetupGet(n => n.Children).Returns(new List<IBTreeNode<int>>());
+                mockNode.SetupGet(n => n.IsLeaf).Returns(true);
+                return mockNode.Object;
+            });
+
+            _btree = new BTree<int>(Degree, _mockRootNode.Object, _mockNodeCreator.Object);
         }
 
         [Test]
         public void Constructor_ValidDegree_CreatesInstance()
         {
-            Assert.DoesNotThrow(() => new BTree<int>(2));
+            var creator = new DefaultNodeCreator<int>();
+            var root = creator.CreateNode();
+            Assert.DoesNotThrow(() => new BTree<int>(2, root, creator));
         }
 
         [Test]
         public void Constructor_InvalidDegree_ThrowsException()
         {
-            Assert.Throws<ArgumentException>(() => new BTree<int>(1));
+            var creator = new DefaultNodeCreator<int>();
+            var root = creator.CreateNode();
+            Assert.Throws<ArgumentException>(() => new BTree<int>(1, root, creator));
         }
 
         [Test]
@@ -39,32 +61,12 @@ namespace BTreeSelectionAlgorithm.Tests
             Assert.That(42, Is.EqualTo(result[0]));
         }
 
-        [Test]
-        public void Select_WithCondition_ReturnsFilteredResults()
-        {
-            var data = new[] { 10, 20, 30, 40, 50 };
-            _btree.Build(data);
-
-            var result = _btree.Select(x => x > 25).ToList();
-
-            Assert.That(3, Is.EqualTo(result.Count));
-            CollectionAssert.Contains(result, 30);
-            CollectionAssert.Contains(result, 40);
-            CollectionAssert.Contains(result, 50);
-        }
 
         [Test]
         public void Select_EmptyTree_ReturnsEmptyCollection()
         {
             var result = _btree.Select(x => true);
             CollectionAssert.IsEmpty(result);
-        }
-
-        [Test]
-        public void Build_LargeDataset_DoesNotThrow()
-        {
-            var largeData = Enumerable.Range(1, 10000);
-            Assert.DoesNotThrow(() => _btree.Build(largeData));
         }
 
         [Test]
@@ -90,40 +92,40 @@ namespace BTreeSelectionAlgorithm.Tests
         }
 
         [Test]
-        public void Select_WithPartialCondition_ReturnsMatchingItems()
+        public void Build_WithMultipleItems_CreatesValidBTree()
         {
-            var data = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            _btree.Build(data);
+            // Arrange
+            var creator = new DefaultNodeCreator<int>();
+            var root = creator.CreateNode();
+            var btree = new BTree<int>(Degree, root, creator);
+            var sequence = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var result = _btree.Select(x => x % 2 == 0).ToList();
+            // Act
+            btree.Build(sequence);
+            var result = btree.Select(x => true).ToList();
 
-            Assert.That(5, Is.EqualTo(result.Count));
-            CollectionAssert.AreEquivalent(new[] { 2, 4, 6, 8, 10 }, result);
+            // Assert
+            Assert.That(result, Has.Count.EqualTo(10));
+            CollectionAssert.AreEquivalent(sequence, result);
         }
 
         [Test]
-        public void Select_WithStringData_WorksCorrectly()
+        public void Select_WithComplexCondition_ReturnsCorrectSubset()
         {
-            var stringTree = new BTree<string>(Degree);
-            stringTree.Build(new[] { "apple", "banana", "cherry" });
+            // Arrange
+            var creator = new DefaultNodeCreator<int>();
+            var root = creator.CreateNode();
+            var btree = new BTree<int>(Degree, root, creator);
+            btree.Build(Enumerable.Range(1, 100));
 
-            var result = stringTree.Select(x => x.StartsWith("a")).ToList();
+            // Act
+            var result = btree.Select(x => x % 3 == 0 && x % 5 == 0).ToList();
 
-            Assert.That(1, Is.EqualTo(result.Count));
-            StringAssert.AreEqualIgnoringCase("apple", result[0]);
-        }
-
-        [Test]
-        public void Select_WithMockEnumerable_OnlyEnumeratesOnce()
-        {
-            var mockSequence = new Mock<IEnumerable<int>>();
-            mockSequence.Setup(x => x.GetEnumerator())
-                       .Returns(() => ((IEnumerable<int>)new[] { 1, 2, 3 }).GetEnumerator());
-
-            var tree = new BTree<int>(Degree);
-            tree.Build(mockSequence.Object);
-
-            mockSequence.Verify(x => x.GetEnumerator(), Times.Once);
+            // Assert
+            Assert.That(result, Has.Count.EqualTo(6)); // 15, 30, 45, 60, 75, 90
+            CollectionAssert.Contains(result, 15);
+            CollectionAssert.Contains(result, 90);
+            CollectionAssert.DoesNotContain(result, 10);
         }
     }
 

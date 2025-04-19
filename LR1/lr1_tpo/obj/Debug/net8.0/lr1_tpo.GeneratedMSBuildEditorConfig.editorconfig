@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = lr1_tpo
-build_property.ProjectDir = D:\Projects\univer\tpo\LR1\lr1_tpo\
+build_property.ProjectDir = D:\Projects\univer\tpo\LR1\TPO\LR1\lr1_tpo\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

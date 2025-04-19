@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bGrqOQPwhHY=",
+  "dgSpecHash": "fhcP6cjGuyI=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\univer\\tpo\\LR1\\lr1_tpo\\lr1_tpo.csproj",
+  "projectFilePath": "D:\\Projects\\univer\\tpo\\LR1\\TPO\\LR1\\lr1_tpo\\lr1_tpo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anime\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512"
   ],
